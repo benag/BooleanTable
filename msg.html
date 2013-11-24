@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.2/cerulean/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="bootstrap/js/libs/jquery.js"></script>
+    
+
+	<style>
+	/*
+#container {
+	margin-top:150px;
+	height:400px;
+
+}*/
+.centered {
+	margin-top:30px;
+
+}
+
+.hero-unit {
+
+	border:3px solid;
+	border-color:#8fadff;
+	margin-top:110px;
+	padding: 20px 40px;
+
+}
+#msg1p {
+	
+}
+#linktoForm{
+	visibility:hidden;
+	margin-left:10px;
+
+}
+#buttons{
+
+	margin-top:13%;
+	margin-left:70%;
+
+
+}
+hr{
+	color: #8fadff;
+	background-color: #8fadff;
+	height: 5px;
+
+}
+#logo{
+
+	margin-top:50px;
+
+
+}
+
+
+	</style>
+	<script>
+	function GetURLParameter(sParam)
+	{
+		var pageURL = window.location.search.substring(1);
+		var params = pageURL.split('&');
+		for (var i=0; i<params.length;i++)
+		{
+			var paramnames = params[i].split('=');
+			if (paramnames[0] == sParam)
+			{
+				return paramnames[1];
+
+			}
+		}
+
+
+	}
+
+
+$(document).ready(function () {
+
+		var success1 = GetURLParameter('success1');
+		var success2 = GetURLParameter('success2');
+		var msg1 = GetURLParameter('msg1');
+		var msg2 = GetURLParameter('msg2');
+		var msg;
+
+		msg1 = decodeURIComponent(msg1);
+		msg2 = decodeURIComponent(msg2);
+
+		if (success1==='true' && success2==='true'){
+			msg = 'The Form Was Sent Successfully';
+			
+			
+		}else{
+			msg = 'There was a Problem Sending the Form ';
+		
+		}
+
+		$('#msglabel').text(msg);
+		if (msg1!='undefined') $('#msg1p').text(msg1);
+		if (success1=='true') {
+			$('#linktoForm').css("visibility","visible"); 
+		}
+		if (msg2 !='undefined') $('#msg2').text(msg2);
+
+
+
+
+
+	});
+		
+
+	</script>
+
+</head>
+<body>
+	<title>Deploy form - Project Implicit</title>
+
+
+	<div class="centered container" id="logo" >
+		 <h1 class="logo"><a href="/implicit/index.jsp">ProjectImplicit</a></h1>
+	</div>
+
+
+	<div id="container" class="container hero-unit" >
+		<h3 id="msglabel" ></h3>
+		<hr>
+		</br>
+		<div id="msg1div">
+			<h4 id="msg1p" style="display:inline;"></h4> <a id="linktoForm" class="btn btn-mini btn-primary " target="_blank" href="/implicit/forms/checklist.html">View Forms</a>
+		</div></br>
+
+		<h4 id="msg2">		</h4>
+
+		<div id="buttons">
+			<a class="btn btn-primary"  style="" href="javascript:history.back()">Return to Deploy Form</a>
+			<a class="btn btn-primary"  style="margin-left:10px;" href="javascript:window.open('','_self').close();">Close</a>
+
+		</div>	
+
+
+		
+	</div>
+</body>
+</html>

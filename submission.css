@@ -1,0 +1,47 @@
+
+.centered{
+	max-width: 800px;
+    margin: auto;
+}
+.centered .logo {
+	margin-left: -40px;
+	text-decoration: none;
+}
+
+h4{margin-bottom: 5px}
+
+.left{
+	padding-left:20px;
+
+}
+.positionLeft{
+	position:relative;left:20px;
+}
+.pclass{
+	font-weight:bold;
+}
+label{
+	font: normal 12px courier !important;
+}
+.plabel{
+	font: normal 12px courier !important;
+	position:relative;
+	top:-10px
+}
+
+#container {
+	padding: 40px;
+    background-color: #f3f3f3;
+}
+
+#footer {
+	position: relative;
+	margin-top: -30px; /* negative value of footer height */
+	height: 30px;
+	clear:both;
+}
+#folder{
+	margin-left:2px;
+}
+
+input[type="checkbox"] {margin: 0px 15px}
