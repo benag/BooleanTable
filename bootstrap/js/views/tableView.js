@@ -167,7 +167,7 @@ define([
       var id='restrictions';
       var summeryValue = this.$el.find('#summery').text();
       window.opener.$("#rulename").val(name);
-      window.opener.$("#" + id).val(summeryValue);
+      window.opener.$("#" + id).html(summeryValue);
       window.opener.$("#hide").val(xml.flush());
 
       window.close();

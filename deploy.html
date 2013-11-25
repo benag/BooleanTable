@@ -18,7 +18,6 @@
 </head>
 <body>
 	<title>Deploy form - Project Implicit</title>
-
 	<div class="centered">
 		 <h1 class="logo"><a href="/implicit/index.jsp">ProjectImplicit</a></h1>
 	</div>
@@ -49,7 +48,10 @@
 		<h4>Participant restrictions *</h4>
 		<p>Consider whether it makes sense for any person from any country of any age to complete your study. List selection restrictions on your sample (e.g., "exclude age >60", "American citizens/residents only"). Also include other study IDs from the pool that should disqualify participants from being assigned to your study. Type "None" if you want any person from any country of any age to complete your study. See http://peoplescience.org/node/104 for more information on this item. Type “n/a” for private studies (not in the Project Implicit research pool). To create restrictions, open the rules generator.<a id ="rulaTableAnch" href="#" onclick="setParametersInURL()"> Open the rule generator </a> </p>
 		
-		<textarea disabled readonly id ="restrictions" name="comments" cols="30" rows="5">None</textarea><br/>
+		<div style="background-color:#f3f3f3;min-height:70px;width:300px;border:1px solid;border-color:#BDBDBD;">
+			<label id ="restrictions" style="padding:5px;" name="comments">None</label>
+		</div>
+		<br/>
 
 		<h4>Participant restrictions comments</h4>
 		<textarea id ="restrictionsComments" name="comments" cols="60" rows="12">None</textarea><br/>
