@@ -158,6 +158,9 @@ function validate(){
 	$('#ReviewerYes_error').css("visibility","hidden");
 	$('#confirmationYes_error').css("visibility","hidden");
 	$('#targetNumber_error').css("visibility","hidden");
+	$('#approved_error').css("visibility","hidden");
+	$('#studyComplete_error').css("visibility","hidden");
+	$('#necessary_error').css("visibility","hidden");
  
 
 
@@ -194,6 +197,29 @@ if (!($('#targetNumber').val())){
 	$('#targetNumber_error').css("visibility","visible");
 
 }
+if (!($('#approved').attr('checked'))){
+
+	notfilled  = "Name of experiment file is not filled";
+	mistake=true;
+	$('#approved_error').css("visibility","visible");
+
+}
+if (!($('#studyComplete').attr('checked'))){
+
+	notfilled  = "Name of experiment file is not filled";
+	mistake=true;
+	$('#studyComplete_error').css("visibility","visible");
+
+}
+if (!($('#necessary').attr('checked'))){
+
+	notfilled  = "Name of experiment file is not filled";
+	mistake=true;
+	$('#necessary_error').css("visibility","visible");
+
+}
+
+
 
 
 if (!($('#ReviewerYes').attr('checked'))){

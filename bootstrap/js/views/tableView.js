@@ -150,9 +150,19 @@ define([
     loadTemplate: function (){
 
       var templateChose; 
-      if ($('#optionsRadios1').is(':checked')) templateChose = 'usWhites26';
+      if ($('#optionsRadios1').is(':checked')) templateChose = 'US_only';
       if ($('#optionsRadios2').is(':checked')) templateChose = 'Over18Priority26';
-      if ($('#optionsRadios3').is(':checked')) templateChose = 'Teachman75';
+      if ($('#optionsRadios3').is(':checked')) templateChose = 'US_over_18';
+      if ($('#optionsRadios4').is(':checked')) templateChose = 'US_White';
+      if ($('#optionsRadios5').is(':checked')) templateChose = 'Whites_Non_hispanics';
+      if ($('#optionsRadios6').is(':checked')) templateChose = 'blacks_Non_hispanics';
+      if ($('#optionsRadios7').is(':checked')) templateChose = 'Asians_Non_hispanics';
+      if ($('#optionsRadios8').is(':checked')) templateChose = 'All_Hispanics';
+      if ($('#optionsRadios9').is(':checked')) templateChose = 'Only_Women';
+      if ($('#optionsRadios10').is(':checked')) templateChose = 'Only_Men';
+      if ($('#optionsRadios11').is(':checked')) templateChose = 'US_Women';
+      if ($('#optionsRadios12').is(':checked')) templateChose = 'US_Men';
+
       $('#modaTemplate').modal('hide');
       this.model.loadTemplate(templateChose);
       this.render();

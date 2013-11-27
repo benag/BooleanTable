@@ -4,7 +4,9 @@ define([
   
   'backbone',
 
-  'XMLWriter'
+  'XMLWriter',
+
+  'FileSaver'
   
 ], function(_,Backbone){
 
@@ -1394,8 +1396,93 @@ cType:'dropdown'},
         ];
 
         this.templates = {
+            US_only:'<?xml version="1.0" encoding="UTF-8"?>'+
+'<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd" >'+
+'<!-- This ruleset selects participants who have identified themselves as US Citizens -->'+
+'<!-- and who have answered the question about their political orientation. -->'+
+'<!-- Conservatives are weighted more heavily for selection than moderates or liberals. -->'+
+'<ruleset name="USandCAOnly">'+
+'    <rule name="USandCAOnly">'+
+'        <conditionPart>'+
+'            <simpleCondition className="Demographics">'+
+'                <naryExp operator="or">'+
+'                    <binaryExp operator="eq">'+
+'                        <field name="citizenship"/>'+
+'                        <constant type="string" value="us"/>'+
+'                    </binaryExp>'+
+'                    <binaryExp operator="eq">'+
+'                        <field name="residence"/>'+
+'                         <constant type="string" value="us"/>'+
+'                    </binaryExp>'+
+'                </naryExp>'+
+'            </simpleCondition>'+
+'        </conditionPart>'+
+'        <actionPart>'+
+'            <assignment>'+
+'                <variable name="weight"/>'+
+'                <constant type="int" value="13"/>'+
+'            </assignment>'+
+'        </actionPart>'+
+'    </rule>'+
+'</ruleset>',
 
-            usWhites26: '<?xml version="1.0" encoding="UTF-8"?>'+
+
+        Over18Priority26:'<?xml version="1.0" encoding="UTF-8"?>'+
+'<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd" >'+
+'<ruleset name="old104">'+
+'    <rule name="old104">'+
+'           <conditionPart>'+
+'            <simpleCondition className="Demographics">'+
+'                <naryExp operator="and">'+
+'                    <binaryExp operator="lte">'+
+'                        <field name="birthyear"/>'+
+'                        <constant type="int" value="1995"/>'+
+'                    </binaryExp>'+
+'                </naryExp>'+
+'            </simpleCondition>'+
+'        </conditionPart>'+
+'    <actionPart>'+
+'        <assignment>'+
+'            <variable name="odds"/>'+
+'            <constant type="int" value="26"/>'+
+'        </assignment>'+
+'    </actionPart>'+
+'    </rule>'+
+'</ruleset>',
+
+    US_over_18: '<?xml version="1.0" encoding="UTF-8"?>'+
+'<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd" >'+
+'<ruleset name="Priority26us">'+
+'    <rule name="Priority26us">'+
+'           <conditionPart>'+
+'            <simpleCondition className="Demographics">'+
+'                <naryExp operator="and">'+
+'                 <naryExp operator="or">'+
+'                    <binaryExp operator="eq">'+
+'                        <field name="citizenship"/>'+
+'                        <constant type="string" value="us"/>'+
+'                    </binaryExp>'+
+'                    <binaryExp operator="eq">'+
+'                        <field name="residence"/>'+
+'                        <constant type="string" value="us"/>'+
+'                    </binaryExp>'+
+'                </naryExp>'+
+'               <binaryExp operator="lte">'+
+'                        <field name="birthyear"/>'+
+'                        <constant type="int" value="1994"/>'+
+'                </binaryExp>'+
+'            </naryExp>'+
+'            </simpleCondition>'+
+'        </conditionPart>'+
+'    <actionPart>'+
+'       <assignment>'+
+'            <variable name="odds"/>'+
+'           <constant type="int" value="26"/>'+
+'        </assignment>'+
+'   </actionPart>'+
+'    </rule>'+
+'</ruleset>',
+        US_White: '<?xml version="1.0" encoding="UTF-8"?>'+
 '<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd" >'+
 '<ruleset>'+
 '    <rule name="WhitesAndUSOnly">'+
@@ -1421,16 +1508,116 @@ cType:'dropdown'},
 '        </actionPart>'+
 '    </rule>'+
 '</ruleset>',
-        Over18Priority26:'<?xml version="1.0" encoding="UTF-8"?>'+
+        Whites_Non_hispanics:'<?xml version="1.0" encoding="UTF-8"?>'+
+'<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd">'+
+'<ruleset name="whites26">'+
+'  <rule name="whites26">'+
+'    <conditionPart>'+
+'      <simpleCondition className="Demographics">'+
+'        <naryExp operator="and">'+
+'          <binaryExp operator="eq">'+
+'            <field name="raceomb"/>'+
+'            <constant type="string" value="6"/>'+
+'          </binaryExp>'+
+'          <binaryExp operator="neq">'+
+'            <field name="ethnicityomb"/>'+
+'            <constant type="string" value="1"/>'+
+'          </binaryExp>'+
+'        </naryExp>'+
+'      </simpleCondition>'+
+'    </conditionPart>'+
+'    <actionPart>'+
+'      <assignment>'+
+'        <variable name="odds"/>'+
+'        <constant type="int" value="26"/>'+
+'      </assignment>'+
+'    </actionPart>'+
+'  </rule>'+
+'</ruleset>',
+            blacks_Non_hispanics:'<?xml version="1.0" encoding="UTF-8"?>'+
+'<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd">'+
+'<ruleset name="whites26">'+
+'  <rule name="whites26">'+
+'    <conditionPart>'+
+'      <simpleCondition className="Demographics">'+
+'        <naryExp operator="and">'+
+'          <binaryExp operator="eq">'+
+'            <field name="raceomb"/>'+
+'            <constant type="string" value="5"/>'+
+'          </binaryExp>'+
+'          <binaryExp operator="neq">'+
+'            <field name="ethnicityomb"/>'+
+'            <constant type="string" value="1"/>'+
+'          </binaryExp>'+
+'        </naryExp>'+
+'      </simpleCondition>'+
+'    </conditionPart>'+
+'    <actionPart>'+
+'      <assignment>'+
+'        <variable name="odds"/>'+
+'        <constant type="int" value="26"/>'+
+'      </assignment>'+
+'    </actionPart>'+
+'  </rule>'+
+'</ruleset>',
+        Asians_Non_hispanics:'<?xml version="1.0" encoding="UTF-8"?>'+
+'<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd">'+
+'<ruleset name="whites26">'+
+'  <rule name="whites26">'+
+'    <conditionPart>'+
+'      <simpleCondition className="Demographics">'+
+'        <naryExp operator="and">'+
+'          <binaryExp operator="eq">'+
+'            <field name="raceomb"/>'+
+'            <constant type="string" value="2"/>'+
+'          </binaryExp>'+
+'          <binaryExp operator="neq">'+
+'            <field name="ethnicityomb"/>'+
+'            <constant type="string" value="1"/>'+
+'          </binaryExp>'+
+'        </naryExp>'+
+'      </simpleCondition>'+
+'    </conditionPart>'+
+'    <actionPart>'+
+'      <assignment>'+
+'        <variable name="odds"/>'+
+'        <constant type="int" value="26"/>'+
+'      </assignment>'+
+'    </actionPart>'+
+'  </rule>'+
+'</ruleset>',
+        All_Hispanics:'<?xml version="1.0" encoding="UTF-8"?>'+
+'<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd">'+
+'<ruleset name="whites26">'+
+'  <rule name="whites26">'+
+'    <conditionPart>'+
+'      <simpleCondition className="Demographics">'+
+'        <naryExp operator="and">'+
+'          <binaryExp operator="eq">'+
+'            <field name="ethnicityomb"/>'+
+'            <constant type="string" value="1"/>'+
+'          </binaryExp>'+
+'        </naryExp>'+
+'      </simpleCondition>'+
+'    </conditionPart>'+
+'    <actionPart>'+
+'      <assignment>'+
+'        <variable name="odds"/>'+
+'        <constant type="int" value="26"/>'+
+'      </assignment>'+
+'    </actionPart>'+
+'  </rule>'+
+'</ruleset>',
+        Only_Women:'<?xml version="1.0" encoding="UTF-8"?>'+
 '<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd" >'+
-'<ruleset name="old104">'+
-'    <rule name="old104">'+
+'<ruleset name="Priority26women">'+
+'    <rule name="Prioritywomen">'+
 '           <conditionPart>'+
 '            <simpleCondition className="Demographics">'+
 '                <naryExp operator="and">'+
-'                    <binaryExp operator="lte">'+
-'                        <field name="birthyear"/>'+
-'                        <constant type="int" value="1995"/>'+
+'                    <binaryExp operator="eq">'+
+'                        <field name="sex"/>'+
+'                        <constant type="string" value="f"/>'+
 '                    </binaryExp>'+
 '                </naryExp>'+
 '            </simpleCondition>'+
@@ -1444,43 +1631,97 @@ cType:'dropdown'},
 '    </rule>'+
 '</ruleset>',
 
-        Teachman75:'<?xml version="1.0" encoding="UTF-8"?>'+
+        Only_Men:'<?xml version="1.0" encoding="UTF-8"?>'+
 '<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd" >'+
-'<ruleset name="Priority26us">'+
-'    <rule name="Priority26us">'+
+'<ruleset name="Priority26women">'+
+'    <rule name="Prioritywomen">'+
 '           <conditionPart>'+
 '            <simpleCondition className="Demographics">'+
 '                <naryExp operator="and">'+
 '                    <binaryExp operator="eq">'+
-'                        <field name="citizenship"/>'+
-'                        <constant type="string" value="us"/>'+
+'                        <field name="sex"/>'+
+'                        <constant type="string" value="m"/>'+
 '                    </binaryExp>'+
-'              <binaryExp operator="lte">'+
-'                        <field name="birthyear"/>'+
-'                        <constant type="int" value="1936"/>'+
-'                    </binaryExp>'+
-'                    <binaryExp operator="gte">'+
-'                        <field name="birthyear"/>'+
-'                        <constant type="int" value="1927"/>'+
-'                    </binaryExp>'+
-'            </naryExp>'+
+'                </naryExp>'+
 '            </simpleCondition>'+
 '        </conditionPart>'+
 '    <actionPart>'+
 '        <assignment>'+
 '            <variable name="odds"/>'+
-'            <constant type="int" value="120"/>'+
+'            <constant type="int" value="26"/>'+
+'        </assignment>'+
+'    </actionPart>'+
+'    </rule>'+
+'</ruleset>',
+
+        US_Women:'<?xml version="1.0" encoding="UTF-8"?>'+
+'<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd" >'+
+'<ruleset name="Priority26usmen">'+
+'    <rule name="Priority26usmen">'+
+'           <conditionPart>'+
+'            <simpleCondition className="Demographics">'+
+'                <naryExp operator="and">'+
+'                    <binaryExp operator="eq">'+
+'                        <field name="sex"/>'+
+'                        <constant type="string" value="f"/>'+
+'                    </binaryExp>'+
+'                    <naryExp operator="or">'+
+'                        <binaryExp operator="eq">'+
+'                            <field name="citizenship"/>'+
+'                            <constant type="string" value="us"/>'+
+'                        </binaryExp>'+
+'                        <binaryExp operator="eq">'+
+'                            <field name="residence"/>'+
+'                            <constant type="string" value="us"/>'+
+'                        </binaryExp>'+
+'                    </naryExp>'+
+'                </naryExp>'+
+'            </simpleCondition>'+
+'        </conditionPart>'+
+'    <actionPart>'+
+'        <assignment>'+
+'            <variable name="odds"/>'+
+'            <constant type="int" value="26"/>'+
+'        </assignment>'+
+'    </actionPart>'+
+'    </rule>'+
+'</ruleset>',
+
+        US_Men:'<?xml version="1.0" encoding="UTF-8"?>'+
+'<!DOCTYPE ruleset PUBLIC "dtd/SRML-simpleRules.dtd" "../dtd/SRML-simpleRules.dtd" >'+
+'<ruleset name="Priority26usmen">'+
+'    <rule name="Priority26usmen">'+
+'           <conditionPart>'+
+'            <simpleCondition className="Demographics">'+
+'                <naryExp operator="and">'+
+'                    <binaryExp operator="eq">'+
+'                        <field name="sex"/>'+
+'                        <constant type="string" value="m"/>'+
+'                    </binaryExp>'+
+'                    <naryExp operator="or">'+
+'                       <binaryExp operator="eq">'+
+'                            <field name="citizenship"/>'+
+'                            <constant type="string" value="us"/>'+
+'                        </binaryExp>'+
+'                        <binaryExp operator="eq">'+
+'                            <field name="residence"/>'+
+'                            <constant type="string" value="us"/>'+
+'                        </binaryExp>'+
+'                    </naryExp>'+
+'                </naryExp>'+
+'            </simpleCondition>'+
+'        </conditionPart>'+
+'    <actionPart>'+
+'        <assignment>'+
+'            <variable name="odds"/>'+
+'            <constant type="int" value="26"/>'+
 '        </assignment>'+
 '    </actionPart>'+
 '    </rule>'+
 '</ruleset>'
 
 
-
-        };
-
-
-
+};
 
 
         this.xml ='';
