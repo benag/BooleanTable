@@ -1,77 +1,5 @@
  	
 
-var CLIENT_ID = '830511155079-lpa46t9sorc26lc73opn1iq9klk0sn6v.apps.googleusercontent.com';//localhost
-//var CLIENT_ID = '997602208608-g9p9tkq0eev8qpqnqe7a5gaep98t4j4a.apps.googleusercontent.com';//localhost
-//var CLIENT_ID = '997602208608.apps.googleusercontent.com';//dev2
-var SCOPES = 'https://www.googleapis.com/auth/drive';
-var token =false;
-var submit=false;
-/**
-* Called when the client library is loaded to start the auth flow.
-*/
-// function handleClientLoad() {
-// 	window.setTimeout(checkAuth, 1);
-// }
-
-/**
-* Check if the current user has authorized the application.
-*/
-// function checkAuth() {
-// 	gapi.auth.authorize(
-// 	    {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': true},
-// 	    handleAuthResult);
-// }
-  /**
-   * Called when the client library is loaded to start the auth flow.
-   */
-  function handleClientLoad() {
-    window.setTimeout(checkAuth, 1);
-  }
-
-  /**
-   * Check if the current user has authorized the application.
-   */
-  function checkAuth() {
-    gapi.auth.authorize(
-        {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': true},
-        handleAuthResult);
-  }
-
-/**
-* Called when authorization server replies.
-*
-* @param {Object} authResult Authorization result.
-*/
-function handleAuthResult(authResult) {
-	
-	if (authResult && !authResult.error) {
-	  token=true;
-	  if (submit===true) uploadFile();
-
-	} else {
-	//  No access token could be retrieved, show the button to start the authorization flow.
-	    gapi.auth.authorize(
-	          {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': false},
-	          handleAuthResult);
-	 
-	}
-}
-
-/**
-* Start the file upload.
-*
-* @param {Object} evt Arguments from the file selector.
-*/
-function uploadFile() {
-
-	gapi.client.load('drive', 'v2', function() {
-		var filedata =getFile();
-		
-
-
-	  insertFile(filedata);
-	});
-}
 
 
 function getFile(){
@@ -254,7 +182,10 @@ function processForm(){
 	}
 
     var msg1 ={};
-    var msg2={};
+    var msg2={
+    	success: true,
+    	text :'No Rule File'
+    };
 
 
     var url="/implicit/rules";
@@ -268,47 +199,53 @@ function processForm(){
 	if (xml!='parent'){
 		sendToServer(xml,path,ruleName,url,msg2);
 	}
-	
-	var timeStamp = Math.round(+new Date()/1000); 
-	var data={};
-        //data.path='/user/'+'bgoldenberg';
-        data.path='/forms/checklist.html';
-        data.FileName =name+timeStamp;
-        console.log('name: '+data.FileName+ ', folder: '+data.path);
-        data.xml = text;
-        data.submit='true';
-        data.realPath = '';
-        console.log(text);
 
-	$.ajax({
-              type: 'POST',
-              url: url,
-              data: JSON.stringify(data),
-              success: function(result) {
+	if (msg2.success!=false){
 
-                      var res = result.length;
-                      if(res === 3){
-                        //alert('File was saved successfully.');
-						    msg1.success=true;
-							msg1.text = "The Deploy form was sent successfully ";
-                      }else{
-                        //alert('File was not saved on our servers, check your study folder name.');
-							msg1.success=false;
-							msg1.text = "There was a problem sending the deploy form";
-                      }
-                          
-                  },
-              fail: function(jqXHR, textStatus, errorThrown){
-                  console.log(jqXHR);
-                  console.log(textStatus);
-                  console.log(errorThrown);
+		var timeStamp = Math.round(+new Date()/1000); 
+		var data={};
+	        //data.path='/user/'+'bgoldenberg';
+	        data.path='/forms/checklist.html';
+	        data.FileName =name+timeStamp;
+	        console.log('name: '+data.FileName+ ', folder: '+data.path);
+	        data.xml = text;
+	        data.submit='true';
+	        data.realPath = '';
+	        console.log(text);
 
-                  alert('fail');
+		$.ajax({
+	              type: 'POST',
+	              url: url,
+	              data: JSON.stringify(data),
+	              success: function(result) {
 
-              },
-              dataType: 'text',
-              async:false
-        });
+	                      var res = result.length;
+	                      if(res === 3){
+	                        //alert('File was saved successfully.');
+							    msg1.success=true;
+								msg1.text = "The Deploy form was sent successfully ";
+	                      }else{
+	                        //alert('File was not saved on our servers, check your study folder name.');
+								msg1.success=false;
+								msg1.text = "There was a problem sending the deploy form";
+	                      }
+	                          
+	                  },
+	              fail: function(jqXHR, textStatus, errorThrown){
+	                  console.log(jqXHR);
+	                  console.log(textStatus);
+	                  console.log(errorThrown);
+
+	                  alert('fail');
+
+	              },
+	              dataType: 'text',
+	              async:false
+	   });
+ 	}else{
+ 		msg1.sucess=false;
+ 		msg1.text = "Deploy Form Was not Sent because there was a problem saving the rule file. "
+ 	}
  
  window.location.assign(msgurl+'?success1='+msg1.success+'&msg1='+msg1.text+'&success2='+msg2.success+'&msg2='+msg2.text);
 
