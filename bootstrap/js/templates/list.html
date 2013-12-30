@@ -122,6 +122,8 @@
 			<div class="modal-body">
 			<p> 
 				Rule Name: <input id="sendRuleInput" type="text" placeholder="Enter File Name..">
+				<script>var name = window.opener.$('#rulename').val();
+				if (name != 'parent') $('#sendRuleInput').val(name);</script>
 			</p>
 			</div>
 			<div class="modal-footer">
@@ -186,6 +188,7 @@
   						US Men
 					</label>
 					
+
 
 				</p>
 			</div>

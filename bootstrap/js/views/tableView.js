@@ -174,10 +174,11 @@ define([
 
     passtoParentWindow:function(xml,name){
 
-      var id='restrictions';
+      var id='restrictionshide';
       var summeryValue = this.$el.find('#summery').text();
       window.opener.$("#rulename").val(name);
-      window.opener.$("#" + id).html(summeryValue);
+      window.opener.$("#" + id).val(summeryValue);
+      window.opener.$('#restrictions').html(summeryValue);
       window.opener.$("#hide").val(xml.flush());
 
       window.close();

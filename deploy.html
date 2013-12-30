@@ -18,9 +18,7 @@
 </head>
 <body>
 	<title>Deploy form - Project Implicit</title>
-	<div class="centered">
-		 <h1 class="logo"><a href="/implicit/index.jsp">ProjectImplicit</a></h1>
-	</div>
+	
 
 
 	<div id="container" class="centered">
@@ -46,17 +44,18 @@
 		<input type="text" id="targetNumber"><label id="targetNumber_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
 
 		<h4>Participant restrictions *</h4>
-		<p>Consider whether it makes sense for any person from any country of any age to complete your study. List selection restrictions on your sample (e.g., "exclude age >60", "American citizens/residents only"). Also include other study IDs from the pool that should disqualify participants from being assigned to your study. Type "None" if you want any person from any country of any age to complete your study. See http://peoplescience.org/node/104 for more information on this item. Type “n/a” for private studies (not in the Project Implicit research pool). To create restrictions, open the rules generator.<a id ="rulaTableAnch" href="#" onclick="setParametersInURL()"> Open the rule generator </a> </p>
+		<p>Consider whether it makes sense for any person from any country of any age to complete your study. List selection restrictions on your sample (e.g., "exclude age >60", "American citizens/residents only"). Also include other study IDs from the pool that should disqualify participants from being assigned to your study. Type "None" if you want any person from any country of any age to complete your study. See http://peoplescience.org/node/104 for more information on this item. Type 'n/a' for private studies (not in the Project Implicit research pool). To create restrictions, open the rules generator.<a id ="rulaTableAnch" href="#" onclick="setParametersInURL()"> Open the rule generator </a> </p>
 		
 		<div style="background-color:#f3f3f3;min-height:70px;width:300px;border:1px solid;border-color:#BDBDBD;">
-			<label id ="restrictions" style="padding:5px;" name="comments">None</label>
-		</div>
+			<label id ="restrictions" style="padding:5px;" name="restrictions">None</label>
+		</div><a id ="clearAnch" href="#" onclick="clearAnchor()">Clear restrictions</a>
 		<br/>
 
 		<h4>Participant restrictions comments</h4>
 		<textarea id ="restrictionsComments" name="comments" cols="60" rows="12">None</textarea><br/>
 		<input type="hidden" id="rulename" name="Language" value="parent">
 		<input type="hidden" id="hide" name="Language" value="parent">
+		<input type="hidden" id="restrictionshide" name="Language" value="parent">
 		<h4> This study has been approved by the appropriate IRB *</h4>
 		<input id="approved" type="checkbox" name="sports" value="soccer"  />Yes
 		<label id="approved_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
@@ -85,7 +84,8 @@
 		</br>
 		<textarea id="comments" name="comments" cols="60" rows="12"></textarea>
 		<br/>
-		<input type="submit" value="Submit" onclick="processForm()">
+		<input type="submit" value="Submit" style="margin-top:5px;" onclick="processForm()">
+		<button type="button" style="margin-left:20px;" onclick="clearForm()">Clear</button>
 	</div>
 
 <!--	<div id="footer">

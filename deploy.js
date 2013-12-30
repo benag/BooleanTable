@@ -1,5 +1,35 @@
  	
 
+$(document).ready(function(){
+
+	if ($('#restrictionshide').val()!='parent'){
+
+		$('#restrictions').text($('#restrictionshide').val());
+		
+	}
+	
+	$("#ReviewerYes").click( function(){
+   		if( $(this).is(':checked') ){
+   			$("#ReviewerNo").attr('checked', false); 
+   		} 
+	});
+	$("#ReviewerNo").click( function(){
+   		if( $(this).is(':checked') ){
+   			$("#ReviewerYes").attr('checked', false); 
+   		} 
+	});
+	$("#confirmationYes").click( function(){
+   		if( $(this).is(':checked') ){
+   			$("#confirmationNo").attr('checked', false); 
+   		} 
+	});
+	$("#confirmationNo").click( function(){
+   		if( $(this).is(':checked') ){
+   			$("#confirmationYes").attr('checked', false); 
+   		} 
+	});
+	
+})
 
 
 function getFile(){
@@ -7,16 +37,17 @@ function getFile(){
 	var date = new Date();
 	var year    = date.getFullYear();
 	var month   = date.getMonth() +1;
-	var day     = date.getDay();
+	//var day     = date.getDay();
+	var day     = date.getDate();
 	var hour    = date.getHours();
 	var minute  = date.getMinutes();
-	var timestamp  = day + "/"+month+"/"+year+","+hour+":"+minute+':'+minute;
+	var timestamp  = month+ "/"+day+"/"+year+", "+hour+":"+minute+':'+minute;
 	
 	//'<tr><td>8/19/2011 16:23:30</td><td>colintest</td><td>cts2e@virginia.edu</td><td>colin</td><td>1</td><td>non</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td></td><td></td><td></td></tr>'
-	var filedata = '<tr><td>'+date+'</td><td>'+$('#folder').val()+'</td><td>'+$('#researchEmail').val()+'</td><td>'+$('#researchName').val()+'</td><td>'+
-	$('#targetNumber').val()+'</td><td>'+$('#restrictions').val()+'</td><td>'+$('#restrictionsComments').val()+'</td><td>'+getCheckBoxVal('ReviewerYes')+'</td><td>'+getCheckBoxVal('studyComplete')+
+	var filedata = '<tr><td>'+timestamp+'</td><td>'+value('folder')+'</td><td>'+value('researchEmail')+'</td><td>'+value('researchName')+'</td><td>'+
+	value('targetNumber')+'</td><td>'+value('rulename')+'</td><td>'+value('restrictions')+'</td><td>'+value('restrictionsComments')+'</td><td>'+getCheckBoxVal('ReviewerYes')+'</td><td>'+getCheckBoxVal('studyComplete')+
 	'</td><td>'+getCheckBoxVal('Virtual')+'</td><td>'+getCheckBoxVal('necessary')+'</td><td>'+getCheckBoxVal('approved')+'</td><td>'+
-	$('#experimentFile').val()+'</td><td>'+$('#comments').val()+'</td></tr>';
+	value('experimentFile')+'</td><td>'+getCheckBoxVal('confirmationYes')+'</td><td>'+value('comments')+'</td></tr>';
 
 
 
@@ -38,6 +69,28 @@ function getFile(){
 
 		return filedata;
 
+}
+function value(field){
+
+	var value;
+
+	if (field==='restrictions'){
+
+		value = $('#'+field).text();
+		if (value==='' || value===undefined || value===null){
+			value= '&nbsp';
+		}
+
+	}else{
+		value = $('#'+field).val();
+		if (value==='' || value===undefined || value===null){
+			value= '&nbsp';
+		}
+		console.log(value);
+
+	}
+	if (value==='parent') return 'None';
+	return value; 
 }
 /**
 * Get true or false if the box was checked
@@ -89,6 +142,8 @@ function validate(){
 	$('#approved_error').css("visibility","hidden");
 	$('#studyComplete_error').css("visibility","hidden");
 	$('#necessary_error').css("visibility","hidden");
+	$('#Virtual_error').css("visibility","hidden");
+
  
 
 
@@ -146,7 +201,13 @@ if (!($('#necessary').attr('checked'))){
 	$('#necessary_error').css("visibility","visible");
 
 }
+if (!($('#Virtual').attr('checked'))){
 
+	notfilled  = "Name of experiment file is not filled";
+	mistake=true;
+	$('#Virtual_error').css("visibility","visible");
+
+}
 
 
 
@@ -173,6 +234,47 @@ return mistake;
 
 
 }
+function clearAnchor(){
+
+	$('#hide').val('parent');
+	$('#rulename').val('parent');
+	$('#restrictionshide').val('parent');
+	$('#restrictions').text('None');
+
+}
+
+function clearForm(){
+
+	$('#researchName').val('');
+    $('#researchEmail').val('');
+    $('#folder').val('');
+	$('#experimentFile').val('');
+	//$('#restrictions').val('None');
+	$('#targetNumber').val('');
+	$('#restrictions').text('None');
+	$('#comments').val('');
+	$('#restrictionsComments').val('None');	
+	
+
+	//hidden 
+	$('#hide').val('parent');
+	$('#rulename').val('parent');
+	$('#restrictionshide').val('parent');
+
+	
+	//checkbox
+	$('#ReviewerYes').removeAttr('checked');
+	$('#ReviewerNo').removeAttr('checked');
+	$('#confirmationNo').removeAttr('checked');
+	$('#Virtual').removeAttr('checked');
+
+	$('#confirmationYes').removeAttr('checked');
+	$('#approved').removeAttr('checked');
+	$('#studyComplete').removeAttr('checked');
+	$('#necessary').removeAttr('checked');
+
+
+}
 
 function processForm(){
 
@@ -189,7 +291,8 @@ function processForm(){
 
 
     var url="/implicit/rules";
-    var msgurl = "/ruleGenerator/msg.html";
+    //var msgurl = "/ruleGenerator/msg.html";
+    var msgurl = "/implicit/user/bgoldenberg/ruleGenerator/msg.html";
 	var text = getFile();
 	var xml = $('#hide' ).val();
 	var name = $('#researchName').val();

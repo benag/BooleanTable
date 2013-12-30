@@ -11,10 +11,10 @@ define([
 ], function(_,Backbone){
 
   var ProjectModel = Backbone.Model.extend({
-  	
+    
     defaults: {
-    	
-		
+        
+        
     },
 
 
@@ -25,7 +25,7 @@ define([
         this.ruleName='';
         this.ruleSetName='';
         this.counter = 2;
-        this.level=1;
+        this.level=0;
         this.params = {};
         //this.url="http://localhost/implicit/rules";
         //this.url="https://dw2.psyc.virginia.edu/implicit/rules";
@@ -36,7 +36,7 @@ define([
 
 
         //The Conditions used by the program:
-        //	cName:     Contidiotn name
+        //  cName:     Contidiotn name
         //  equal:     This is actually the operator
         //  equalXML:  The operator that will be written in the xml.
         //  Values:    The values for the condition.
@@ -794,9 +794,9 @@ cType:'dropdown'
 ],  
 cType:'dropdown'},
 {
-            cName:'Study',
+            cName:'Exclude Study',
             cNameXML:'study',
-            equal:['Completed','Started but not Completed','Never Taken or Not Completed','If Started Completed','Started Studies','Previous Study ID'],
+            equal:['Completed','Started but not Completed','Started Studies','Previous Study ID'],
             equalXML:[],
             values:[],
             valuesXML:[],
@@ -1377,7 +1377,7 @@ cType:'dropdown'},
         
       
 
-    	
+        
         this.controls =[
         {controlName:'DeleteRow',html:'<button class="btn btn-mini link" id="button2" data-original-title="Delete Row"><i class="icon-minus-sign"></i></button>'},
         {controlName:'BooleanDropBox',html:'<div id="booleanDiv" class="btn-group"><button class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">'+
@@ -1725,7 +1725,7 @@ cType:'dropdown'},
 
 
         this.xml ='';
-    	
+        
         this.summeryText='';
         this.parseParams();
        
@@ -1794,30 +1794,30 @@ cType:'dropdown'},
 
         if (arg==='w'){
             
-            if (row.rowValue.dropdownTwo==='Completed'){
+            // if (row.rowValue.dropdownTwo==='Completed'){
 
-                row.rowValue.dropdownOne = row.rowValue.dropdownThree;
-                row.rowValue.dropdownThree = 'c';
-                row.rowValue.dropdownTwo = 'eq';
+            //     row.rowValue.dropdownOne = row.rowValue.dropdownThree;
+            //     row.rowValue.dropdownThree = 'c';
+            //     row.rowValue.dropdownTwo = 'eq';
                 
-            //'Started','Finished','Not Finished','Not Started'],
-            }
+            // //'Started','Finished','Not Finished','Not Started'],
+            // }
+            // if (row.rowValue.dropdownTwo==='Started but not Completed'){
+
+            //     row.rowValue.dropdownOne = row.rowValue.dropdownThree;
+            //     row.rowValue.dropdownThree = 'i';
+            //     row.rowValue.dropdownTwo = 'eq';
+
+
+            // }
             if (row.rowValue.dropdownTwo==='Started but not Completed'){
-
-                row.rowValue.dropdownOne = row.rowValue.dropdownThree;
-                row.rowValue.dropdownThree = 'i';
-                row.rowValue.dropdownTwo = 'eq';
-
-
-            }
-            if (row.rowValue.dropdownTwo==='Never Taken or Not Completed'){
 
                 row.rowValue.dropdownOne = row.rowValue.dropdownThree;
                 row.rowValue.dropdownThree = 'c';
                 row.rowValue.dropdownTwo = 'neq';
 
             }
-            if (row.rowValue.dropdownTwo==='If Started Completed'){
+            if (row.rowValue.dropdownTwo==='Completed'){
 
                 row.rowValue.dropdownOne = row.rowValue.dropdownThree;
                 row.rowValue.dropdownThree = 'i';
@@ -1845,39 +1845,39 @@ cType:'dropdown'},
         }
         if (arg==='r'){
 
-            if (row.rowValue.dropdownThree === 'c' && row.rowValue.dropdownTwo === 'eq'){
+            // if (row.rowValue.dropdownThree === 'c' && row.rowValue.dropdownTwo === 'eq'){
 
-                row.rowValue.dropdownThree = row.rowValue.dropdownOne;
-                row.rowValue.dropdownOne = 'Study';
-                row.rowValue.dropdownTwo = 'Completed';
-            }
-            if (row.rowValue.dropdownThree === 'i' && row.rowValue.dropdownTwo === 'eq'){
+            //     row.rowValue.dropdownThree = row.rowValue.dropdownOne;
+            //     row.rowValue.dropdownOne = 'Study';
+            //     row.rowValue.dropdownTwo = 'Completed';
+            // }
+            // if (row.rowValue.dropdownThree === 'i' && row.rowValue.dropdownTwo === 'eq'){
 
-                row.rowValue.dropdownThree = row.rowValue.dropdownOne;
-                row.rowValue.dropdownOne = 'Study';
-                row.rowValue.dropdownTwo = 'Started but not Completed';
-            }
+            //     row.rowValue.dropdownThree = row.rowValue.dropdownOne;
+            //     row.rowValue.dropdownOne = 'Study';
+            //     row.rowValue.dropdownTwo = 'Started but not Completed';
+            // }
             if (row.rowValue.dropdownThree === 'c' && row.rowValue.dropdownTwo === 'neq'){
 
                 row.rowValue.dropdownThree = row.rowValue.dropdownOne;
-                row.rowValue.dropdownOne = 'Study';
-                row.rowValue.dropdownTwo = 'Never Taken or Not Completed';
+                row.rowValue.dropdownOne = 'Exclude Study';
+                row.rowValue.dropdownTwo = 'Started but not Completed';
             }
             if (row.rowValue.dropdownThree === 'i' && row.rowValue.dropdownTwo === 'neq'){
 
                 row.rowValue.dropdownThree = row.rowValue.dropdownOne;
-                row.rowValue.dropdownOne = 'Study';
-                row.rowValue.dropdownTwo = 'If Started Completed';
+                row.rowValue.dropdownOne = 'Exclude Study';
+                row.rowValue.dropdownTwo = 'Completed';
             }
             if (row.rowValue.dropdownOne === 'started_studies'){
 
-                row.rowValue.dropdownOne = 'Study';
+                row.rowValue.dropdownOne = 'Exclude Study';
                 row.rowValue.dropdownTwo = 'Started Studies';
             }
             if (row.rowValue.dropdownOne === 'previous_study_id'){
 
                 
-                row.rowValue.dropdownOne = 'Study';
+                row.rowValue.dropdownOne = 'Exclude Study';
                 row.rowValue.dropdownTwo = 'Previous Study ID';
             }
 
@@ -1890,7 +1890,7 @@ cType:'dropdown'},
         var rows = this.TRows;
         for(var i=0;i<rows.length;i++){
 
-            if (rows[i].rowValue.dropdownOne === 'Study'){
+            if (rows[i].rowValue.dropdownOne === 'Exclude Study'){
                 this.changeValues(rows[i],'w');
             }
 
@@ -2636,7 +2636,7 @@ cType:'dropdown'},
             v.rowValue.dropdownOne = value;
             v.rowValue.dropdownTwo = 'Expression';
             v.rowValue.dropdownThree = 'Value';
-            if (value==='Postal Code'||value==='Study'){
+            if (value==='Postal Code'||value==='Exclude Study'){
                 v.cType = 'label';
                 v.rowValue.dropdownThree = '';
             }else{

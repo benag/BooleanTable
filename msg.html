@@ -15,9 +15,9 @@
 	<style>
 	/*
 #container {
-	margin-top:150px;
-	height:400px;
-
+	margin-top:60px;
+	height:300px;
+	width:560px;
 }*/
 .centered {
 	margin-top:30px;
@@ -28,8 +28,9 @@
 
 	border:3px solid;
 	border-color:#8fadff;
-	margin-top:110px;
-	padding: 20px 40px;
+	margin-top:60px;
+	width:560px;
+	padding: 20px 20px;
 
 }
 #msg1p {
@@ -42,8 +43,8 @@
 }
 #buttons{
 
-	margin-top:13%;
-	margin-left:70%;
+	margin-top:12%;
+	float:right;
 
 
 }
@@ -80,9 +81,17 @@ hr{
 
 	}
 
+	function topPage(){
+
+		$('body').scrollTop(0);
+
+
+	}
+
 
 $(document).ready(function () {
 
+		
 		var success1 = GetURLParameter('success1');
 		var success2 = GetURLParameter('success2');
 		var msg1 = GetURLParameter('msg1');
@@ -118,15 +127,11 @@ $(document).ready(function () {
 	</script>
 
 </head>
-<body>
+<body onload="topPage()">
 	<title>Deploy form - Project Implicit</title>
 
 
-	<div class="centered container" id="logo" >
-		 <h1 class="logo"><a href="/implicit/index.jsp">ProjectImplicit</a></h1>
-	</div>
-
-
+	
 	<div id="container" class="container hero-unit" >
 		<h3 id="msglabel" ></h3>
 		<hr>
@@ -139,7 +144,7 @@ $(document).ready(function () {
 
 		<div id="buttons">
 			<a class="btn btn-primary"  style="" href="javascript:history.back()">Return to Deploy Form</a>
-			<a class="btn btn-primary"  style="margin-left:10px;" href="javascript:window.open('','_self').close();">Close</a>
+			
 
 		</div>	
 
