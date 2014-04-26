@@ -1,0 +1,216 @@
+<style>
+	a.logo:hover {text-decoration:none}
+	a.logo {margin: 10px 1px}
+	.container {
+		width:70%;
+		
+	}
+	.hero-unit {padding: 8px 30px}
+	#buttons {text-align:left; margin-top:10px}
+	.dropdown-toggle span.caret {margin-left:5px}	
+	.table {position:relative; top:-15px;}
+	#summeryDiv {padding:10px;}
+	p { font-size: 14px;}
+	.btn-danger { margin-left:100px;}
+	.bg{background-color:#5AB7E6;}​,
+		input[type="text"].inputMysize {
+			vertical-align:baseline;
+			height: 14px;
+			margin-bottom: 0px;
+			padding-top: 3px;
+			
+		}
+
+
+		.Absolute-Center {
+			  width: 50%;
+			  height: 50%;
+			  overflow: auto;
+			  margin: auto;
+			  position: absolute;
+			  top: 0; left: 0; bottom: 0; right: 0;
+		},
+		.Center-Container {
+  			position: relative;
+		},
+		.errorLabel {
+		    visibility:hidden;       
+		    color:Red;
+
+		}
+</style>
+
+	<div class="container" >	
+		<!-- Header -->		
+		<a class="logo" href="/implicit/index.jsp">
+			<h3>ProjectImplicit</h3>
+		</a>
+		<!--<div class="alert alert-error" style="display: none">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Warning!</strong> File was not saved on our servers, check your path or file name.
+  			<a class="btn btn-danger" role="button" id="close-button" data-dismiss="alert">Close</a>
+		</div>!-->
+		<!-- Hero Box  data-toggle="collapse" data-target="#explain"-->			
+
+		<div class="hero-unit" id="viewdetails" >
+			<h4 style="display:inline;">How to Use:</h4><a id="collapse" style="padding-left:10px;" class="btn btn-primary btn-mini pull-right"><i class="icon-sort-down"></i><span>&nbsp<span> Hide </span>&nbsp</span></a>
+			<p id="explain" style="">Create a set of conditions that define who can take your study. Make sure that all the conditions that are listed in an “All” must be true and that at least one of the conditions listed in an “Any” must be true. Use “End all” and “And any” to close a list of conditions. The gray box below shows the condition in plain words. A red “Rule is not ready” will appear whenever the rules are not ready to use (e.g., if you haven’t closed an “Any” list with “End any”).
+			You can save the file that was created into your local computer or load a pre-existing file from your computer and edit it with the generator. Once finished, press the 'Done' button and the rule will be saved to the study folder on the server. &nbsp&nbsp
+			
+			<a class="btn btn-primary btn-small" target="_blank" style="" href="http://peoplescience.org/node/104">Learn more</a>
+			</p>
+			
+		</div>
+		
+		<!-- Table -->
+	    <table id="ruleTable" class="table">
+		    <thead>
+		    	<tr id ="header" class='clickableRow' >  
+		            <th>
+						<h5>Summary of Rule Logic:</h5>	
+		            	<div id="summeryDiv" style="background-color:#E8E8E8;min-height:45px;width:500px;vertical-align: middle; ">
+		            		<label id="summery" style="cursor: default;"></label>
+		            	</div>
+		            	<label id="error" class="errorLabel" style="visibility:hidden;color:Red;">Rule is not ready</label>
+
+		            	<div id="buttons">
+		            		   		 					
+		            		<button class="btn btn-small btn-primary" id="button9" >Clear</button>
+		            		<button class="btn btn-small btn-primary" id="button10" >Reset</button>
+		            		<a class="btn btn-primary btn-small" role="button" href="#Mymodal" data-toggle="modal" id="button12" >Download to my computer</a>
+   		 					<!--<button class="btn btn-small btn-primary" id="button12" >Download to my computer</button>!-->
+   		 					<div class="fileupload fileupload-new" data-provides="fileupload" style="display:inline;">
+  								<span class="btn btn-file btn-small btn-primary"><span class="fileupload-new">Load from my computer</span><span class="fileupload-exists">Load from my computer</span><input type="file" id="files" name="files[]"/><output id="list"></output></span>
+  							</div>
+  							<a class="btn btn-primary btn-small" role="button" href="#modaTemplate" data-toggle="modal" id="templateButt" >Load Templates</a>
+   		 					<!--<button class="btn btn-small btn-primary" id="button13" >Load from my computer</button>!-->		            	    
+						</div>
+		            </th>  
+	           </tr>
+	 	    </thead>
+		    <tbody>
+		    	
+		    </tbody>
+   		 </table>
+   		 <center>
+	    <a class="btn btn-success" id="ruleDone" role="button" data-toggle="modal" >Done</a>
+	    <a class="btn btn-danger" role="button" id="cancel-button" >Cancel</a>
+		</center>
+	    
+  	</div>
+   		 <!-- Modal -->
+		<div id="Mymodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="MymodalLabel" aria-hidden="true">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">ֳ—</button>
+			<h3 id="myModalLabel">Please Enter Rule Name:</h3>
+			</div>
+			<div class="modal-body">
+			<p> 
+				Rule Name: <input id="ruleInput" type="text" placeholder="Enter File Name..">
+			</p>
+			</div>
+			<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			<button id="saveChange" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+		<div id="Mymodal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Mymodal2Label" aria-hidden="true">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">ֳ—</button>
+			<h3 id="myModalLabel">Please Enter Rule Name:</h3>
+			</div>
+			<div class="modal-body">
+			<p> 
+				Rule Name: <input id="sendRuleInput" type="text" placeholder="Enter File Name..">
+				<script>var name = window.opener.$('#rulename').val();
+				if (name != 'parent') $('#sendRuleInput').val(name);</script>
+			</p>
+			</div>
+			<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			<button id="sendToServer" class="btn btn-primary">Done</button>
+			</div>
+		</div>
+		
+		<div id="modaTemplate" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modaTemplateLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">ֳ—</button>
+				<h3 id="myModalLabel">Enter Template:</h3>
+			</div>
+			<div class="modal-body">
+				<p> 
+
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+  						US only
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios2" value="option1" >
+  						Over 18
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios3" value="option2">
+  						US over 18
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios4" value="option1" >
+  						US White
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios5" value="option1" >
+  						Whites, Non-hispanics 
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios6" value="option2">
+  						blacks, Non-hispanics 
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios7" value="option1" >
+  						Asians, Non-hispanics
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios8" value="option1" >
+  						All Hispanics
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios9" value="option2">
+  						Only Women
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios10" value="option1" >
+  						Only Men
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios11" value="option1" >
+  						US Women
+					</label>
+					<label class="radio">
+  						<input type="radio" name="optionsRadios" id="optionsRadios12" value="option2">
+  						US Men
+					</label>
+					
+
+
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				<button id="LoadTemplate" class="btn btn-primary">Done</button>
+			</div>
+		</div>
+		<!--<div id="Errormodal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ErrormodalLabel" aria-hidden="true">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">ֳ—</button>
+			<h3 id="myModalLabel">Warning Error in Saving File</h3>
+			</div>
+			<div class="modal-body">
+			<p> 
+				File was not saved on our servers, check your study folder location. 
+			</p>
+			</div>
+			<div class="modal-footer">
+			<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
+			</div>
+		</div>!-->
+	</div>
+	

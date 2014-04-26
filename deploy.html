@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<link href="submission.css" rel="stylesheet" >
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	
+	<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="bootstrap/js/libs/jquery.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script src="deploy.js"></script>
+	
+	<!--responsive design!-->
+
+    <!--responsive design!-->
+    <!--<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>!-->
+</head>
+<body>
+	<title>Deploy form - Project Implicit</title>
+	
+
+
+	<div id="container" class="centered">
+
+		<h3>Checklist for Posting A Study to the Project Implicit Research Pool</h3>
+		<p>This is the final step for moving a study from test to production. Moving to production is a big deal. You must complete each of the following boxes before submitting the study. Someone from Project Implicit will follow-up with questions if needed, or with confirmation that the study is moved to production. IMPORTANT: The researcher is responsible for debugging and accuracy of the study materials. The checklists are methods for helping researcher identify likely problems.</p>
+
+		<h4>Researcher name *</h4>
+		<input type="text" id="researchName" ><label id="researchName_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+		<h4>Researcher email address *</h4>
+		<input  type="text" id="researchEmail"><label id="researchEmail_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+
+		<h4>Study folder location *</h4>
+		<label>For example: myUser/myStudyFolder</label><br/>
+		user/ <input type="text" id="folder" ><label id="folder_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+
+		<h4>Name of experiment file *</h4>
+		<label>For example: sourceexpertise.expt.xml</label><br/>
+		<input type="text" id="experimentFile"><label id="experimentFile_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+
+		<h4>Target number of completed study sessions *</h4>
+		<label>For private studies (not in the Project Implicit research pool), enter n/a</label><br/>
+		<input type="text" id="targetNumber"><label id="targetNumber_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+
+		<h4>Participant restrictions *</h4>
+		<p>Consider whether it makes sense for any person from any country of any age to complete your study. List selection restrictions on your sample (e.g., "exclude age >60", "American citizens/residents only"). Also include other study IDs from the pool that should disqualify participants from being assigned to your study. Type "None" if you want any person from any country of any age to complete your study. See http://peoplescience.org/node/104 for more information on this item. Type 'n/a' for private studies (not in the Project Implicit research pool). To create restrictions, open the rules generator.<a id ="rulaTableAnch" href="#" onclick="setParametersInURL()"> Open the rule generator </a> </p>
+		
+		<div style="background-color:#f3f3f3;min-height:70px;width:300px;border:1px solid;border-color:#BDBDBD;">
+			<label id ="restrictions" style="padding:5px;" name="restrictions">None</label>
+		</div><a id ="clearAnch" href="#" onclick="clearAnchor()">Clear restrictions</a>
+		<br/>
+
+		<h4>Participant restrictions comments</h4>
+		<textarea id ="restrictionsComments" name="comments" cols="60" rows="12">None</textarea><br/>
+		<input type="hidden" id="rulename" name="Language" value="parent">
+		<input type="hidden" id="hide" name="Language" value="parent">
+		<input type="hidden" id="restrictionshide" name="Language" value="parent">
+		<h4> This study has been approved by the appropriate IRB *</h4>
+		<input id="approved" type="checkbox" name="sports" value="soccer"  />&nbsp;Yes
+		<label id="approved_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+		<h4>All items on "Study Testing" and "Study Approval" from Project Implicit Study Development Checklist completed (items 9 - 17) *</h4>
+		<p class="plabel">The checklist is available at http://peoplescience.org/node/105</p>
+		<input id="studyComplete" type="checkbox" name="sports" value="soccer"  />&nbsp;Yes
+		<label id="studyComplete_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+		<h4>My study folder on dev2 includes ZERO files that aren't necessary for the study (e.g., word documents, older versions of files, items that were dropped from the final version) *</h4>
+		<input id="necessary" type="checkbox" name="sports" value="soccer"  />&nbsp;Yes
+		<label id="necessary_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+		<h4>Study approved by a *User Experience* Reviewer (Colin Smith or Kate Ratliff) *</h4>
+		<p class="plabel">Email studysubmission@projectimplicit.net to have your study approved by one of the above reviewers.</p>
+		<input id="ReviewerYes" type="checkbox" name="sports" value="soccer"  />&nbsp;Yes<br/>
+		<input id="ReviewerNo" type="checkbox" name="sports" value="soccer"  />&nbsp;No, this study is not for the Project Implicit pool.
+		<label id="ReviewerYes_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+		<h4>If you are building this study for another researcher (e.g. a contract study), has the researcher received the standard final launch confirmation email and confirmed that the study is ready to be launched? *</h4>
+		<p class="plabel">The standard email can be found here: http://peoplescience.org/node/135</p>
+		<input id="confirmationYes" type="checkbox" name="sports" value="soccer" />&nbsp;Yes<br/>
+		<input id ="confirmationNo" type="checkbox" name="sports" value="soccer" />&nbsp;No, this study is mine
+		<label id="confirmationYes_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+		<h4>Study submitted to the Virtual Lab (http://rde.implicit.net/) *</h4>
+		<p class="plabel">Researchers should retrieve "real" data from the Virtual Lab at first opportunity after it moves to production as a sanity check on study and data accuracy</p>
+		<input id="Virtual" type="checkbox" name="sports" value="soccer"/>&nbsp;Yes
+		<label id="Virtual_error" class="errorLabel" style="visibility:hidden;color:Red;">* Not Filled</label>
+		<h4>Use the space below for any additional comments</h4>
+		</br>
+		<textarea id="comments" name="comments" cols="60" rows="12"></textarea>
+		<br/>
+		<input type="submit" value="Submit" style="margin-top:5px;" onclick="processForm()">
+		<button type="button" style="margin-left:20px;" onclick="clearForm()">Clear</button>
+	</div>
+
+<!--	<div id="footer">
+		<hr>
+  		<font style="display: inline;">Posted by: Hege Refsnes</font>
+  		<font>Contact information: <a href="mailto:someone@example.com">
+  		someone@example.com</a>.</font>
+	</div> !-->
+
+<div class="modal fade" id="ruleModel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Rule File Exists </h4>
+      </div>
+      <div class="modal-body">
+        <p>A rule file for this folder already exists, overwrite?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="overwriteClose" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="overwriteB" class="btn btn-primary">Yes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="folderModel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Study Folder not Found </h4>
+      </div>
+      <div class="modal-body">
+        <p>Study Folder was not Found, check your study folder name.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="OkClose" class="btn btn-primary" data-dismiss="modal">OK</button>
+       
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+</body>
+</html>
