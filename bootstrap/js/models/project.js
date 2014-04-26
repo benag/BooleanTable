@@ -793,6 +793,7 @@ cType:'dropdown'
    'zw'
 ],  
 cType:'dropdown'},
+<<<<<<< HEAD
 // {
 //             cName:'Exclude Study',
 //             cNameXML:'study',
@@ -807,6 +808,12 @@ cType:'dropdown'},
             cName:'Did not Start Study',
             cNameXML:'study',
             equal:['Study ID is'],
+=======
+{
+            cName:'Exclude Study',
+            cNameXML:'study',
+            equal:['Completed','Started but not Completed','Started Studies','Previous Study ID'],
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
             equalXML:[],
             values:[],
             valuesXML:[],
@@ -814,6 +821,7 @@ cType:'dropdown'},
             cType:'label'
 },
 {
+<<<<<<< HEAD
             cName:'Started but Did not Complete Study',
             cNameXML:'study',
             equal:['Study ID is'],
@@ -845,6 +853,8 @@ cType:'dropdown'},
 },
 
 {
+=======
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
             cName:'General Religious Affiliation',
             cNameXML:'religion',//demographics
             equal:['Is','Is Not'],
@@ -1812,12 +1822,20 @@ cType:'dropdown'},
     },
     clearModel:function(){
          this.TRows = [
+<<<<<<< HEAD
          {ID:'rowB0l0',typeR:'B',level:0,rowValue:{booleanValue:'All'},cType:'dropdown'},
          {ID:'rowEB1l0',typeR:'EB',level:0,rowValue:{booleanValue:'End All'},cType:'dropdown'}
 
          ];
          this.level=0;
          this.counter=2;
+=======
+         {ID:'rowB0l0',typeR:'B',level:0,rowValue:{booleanValue:''}}
+
+         ];
+         this.level=0;
+         this.counter=1;
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
     },
     loadDefaultModel:function(){
         this.TRows = [
@@ -1852,6 +1870,7 @@ cType:'dropdown'},
 
 
             // }
+<<<<<<< HEAD
             if (row.rowValue.dropdownOne === 'Did not Start Study'){
 
                 row.rowValue.dropdownOne = row.rowValue.dropdownThree;
@@ -1863,6 +1882,19 @@ cType:'dropdown'},
 
                 row.rowValue.dropdownOne = row.rowValue.dropdownThree;
                 row.rowValue.dropdownThree = 'c';
+=======
+            if (row.rowValue.dropdownTwo==='Started but not Completed'){
+
+                row.rowValue.dropdownOne = row.rowValue.dropdownThree;
+                row.rowValue.dropdownThree = 'c';
+                row.rowValue.dropdownTwo = 'neq';
+
+            }
+            if (row.rowValue.dropdownTwo==='Completed'){
+
+                row.rowValue.dropdownOne = row.rowValue.dropdownThree;
+                row.rowValue.dropdownThree = 'i';
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
                 row.rowValue.dropdownTwo = 'neq';
 
 
@@ -1875,6 +1907,7 @@ cType:'dropdown'},
 
 
             }
+<<<<<<< HEAD
             // if (row.rowValue.dropdownTwo==='Previous Study ID'){
 
             //     row.rowValue.dropdownOne = 'previous_study_id';
@@ -1887,12 +1920,21 @@ cType:'dropdown'},
 
                 row.rowValue.dropdownOne = 'previous_study_id';
                 row.rowValue.dropdownThree = 'none';
+=======
+            if (row.rowValue.dropdownTwo==='Previous Study ID'){
+
+                row.rowValue.dropdownOne = 'previous_study_id';
+                //row.rowValue.dropdownThree = 'i';
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
                 row.rowValue.dropdownTwo = 'eq';
 
 
             }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
         }
         if (arg==='r'){
 
@@ -1908,6 +1950,7 @@ cType:'dropdown'},
             //     row.rowValue.dropdownOne = 'Study';
             //     row.rowValue.dropdownTwo = 'Started but not Completed';
             // }
+<<<<<<< HEAD
             if (row.rowValue.dropdownThree === 'i' && row.rowValue.dropdownTwo === 'neq'){
 
                 row.rowValue.dropdownThree = row.rowValue.dropdownOne;
@@ -1919,12 +1962,26 @@ cType:'dropdown'},
                 row.rowValue.dropdownThree = row.rowValue.dropdownOne;
                 row.rowValue.dropdownOne = 'Started but Did not Complete Study';
                 row.rowValue.dropdownTwo = 'Study id is';
+=======
+            if (row.rowValue.dropdownThree === 'c' && row.rowValue.dropdownTwo === 'neq'){
+
+                row.rowValue.dropdownThree = row.rowValue.dropdownOne;
+                row.rowValue.dropdownOne = 'Exclude Study';
+                row.rowValue.dropdownTwo = 'Started but not Completed';
+            }
+            if (row.rowValue.dropdownThree === 'i' && row.rowValue.dropdownTwo === 'neq'){
+
+                row.rowValue.dropdownThree = row.rowValue.dropdownOne;
+                row.rowValue.dropdownOne = 'Exclude Study';
+                row.rowValue.dropdownTwo = 'Completed';
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
             }
             if (row.rowValue.dropdownOne === 'started_studies'){
 
                 row.rowValue.dropdownOne = 'Exclude Study';
                 row.rowValue.dropdownTwo = 'Started Studies';
             }
+<<<<<<< HEAD
             if (row.rowValue.dropdownOne === 'Did not Take a Study in the Last 15min'){
 
                 
@@ -1933,6 +1990,13 @@ cType:'dropdown'},
                 row.rowValue.dropdownTwo = '';
                 row.rowValue.dropdownThree =  undefined;
 
+=======
+            if (row.rowValue.dropdownOne === 'previous_study_id'){
+
+                
+                row.rowValue.dropdownOne = 'Exclude Study';
+                row.rowValue.dropdownTwo = 'Previous Study ID';
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
             }
 
         }
@@ -1944,7 +2008,11 @@ cType:'dropdown'},
         var rows = this.TRows;
         for(var i=0;i<rows.length;i++){
 
+<<<<<<< HEAD
             if (rows[i].rowValue.dropdownOne === 'Started but Did not Complete Study' || rows[i].rowValue.dropdownOne === 'Did not Start Study' || rows[i].rowValue.dropdownOne === 'Did not Take a Study in the Last 15min'){
+=======
+            if (rows[i].rowValue.dropdownOne === 'Exclude Study'){
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
                 this.changeValues(rows[i],'w');
             }
 
@@ -1955,7 +2023,11 @@ cType:'dropdown'},
     isStudy:function(row){
 
         if (row.rowValue.dropdownThree==='c' || row.rowValue.dropdownThree==='i') return true;
+<<<<<<< HEAD
         if (row.rowValue.dropdownOne==='started_studies' || row.rowValue.dropdownOne==='Did not Take a Study in the Last 15min') return true;
+=======
+        if (row.rowValue.dropdownOne==='started_studies' || row.rowValue.dropdownOne==='previous_study_id') return true;
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
         return false;
 
     },
@@ -1974,6 +2046,7 @@ cType:'dropdown'},
 
             if (this.isStudy(rows[i])){
                 this.changeValues(rows[i],'r');
+<<<<<<< HEAD
                 if (rows[i].rowValue.dropdownOne!='Did not Take a Study in the Last 15min'){
                     rows[i].cType='label';
 
@@ -1984,6 +2057,19 @@ cType:'dropdown'},
                 rows[i].cType='label';
             }
 
+=======
+                rows[i].cType='label';
+
+            }
+            if(this.isZip(rows[i])){
+                rows[i].cType='label';
+
+
+
+            }
+
+
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
         }
 
     },
@@ -2327,6 +2413,7 @@ cType:'dropdown'},
                     errorMsg="Missing End Tag";
 
                 }
+<<<<<<< HEAD
                 if (row.cType!='none'){
                     if (rowVal.dropdownTwo===null || rowVal.dropdownTwo===undefined || rowVal.dropdownTwo ==='' || rowVal.dropdownTwo==='Expression'){
                         conditionError=true;
@@ -2352,6 +2439,22 @@ cType:'dropdown'},
              
             }
       
+=======
+                if (rowVal.dropdownTwo===null || rowVal.dropdownTwo===undefined || rowVal.dropdownTwo ==='' || rowVal.dropdownTwo==='Expression'){
+                    conditionError=true;
+                    errorMsg="Missing End Tag";
+                }
+
+                if (rowVal.dropdownThree===null || rowVal.dropdownThree===undefined || rowVal.dropdownThree ==='' || rowVal.dropdownThree==='Value'){
+                    conditionError=true;
+                    errorMsg="Missing End Tag";
+                }
+
+            }
+            
+
+
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
         }
 
         callback(errorMsg,conditionError);
@@ -2488,7 +2591,11 @@ cType:'dropdown'},
        
             var childNodes=node.childNodes;
             var firstChild= node.firstChild;
+<<<<<<< HEAD
             //console.log(firstChild.nodeName)
+=======
+            console.log(firstChild.nodeName)
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
             for (var i=0;i<childNodes.length;i++)
             {
                 if (firstChild.nodeType==1)
@@ -2700,6 +2807,7 @@ cType:'dropdown'},
             v.rowValue.dropdownOne = value;
             v.rowValue.dropdownTwo = 'Expression';
             v.rowValue.dropdownThree = 'Value';
+<<<<<<< HEAD
             if (value==='Did not Take a Study in the Last 15min'){
                 v.cType = 'none';
             }else{
@@ -2713,6 +2821,15 @@ cType:'dropdown'},
 
             }
             
+=======
+            if (value==='Postal Code'||value==='Exclude Study'){
+                v.cType = 'label';
+                v.rowValue.dropdownThree = '';
+            }else{
+                v.cType = 'dropdown';
+                v.rowValue.dropdownThree = 'Value';
+            }
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
 
           } 
         })

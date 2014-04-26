@@ -29,8 +29,12 @@ define([
       "click #button9"   : "clear",      
       "click #button10"   : "reset",
       "click #saveChange" : "save",
+<<<<<<< HEAD
       "click #ruleDone" : "sendII",
       //"Click #done-button" : "send",
+=======
+      "click #sendToServer" : "send",
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
       "click #LoadTemplate" : "loadTemplate",
       "change #files" : "load",
       "click #collapse": "collapse",
@@ -96,7 +100,11 @@ define([
         
 
         
+<<<<<<< HEAD
       $('#files').val("");
+=======
+    
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
       } else {
         alert('The File APIs are not fully supported in this browser.');
       }
@@ -126,13 +134,17 @@ define([
           var xml = self.model.makeXML();
           self.model.saveToDisk(xml.flush());
           self.model.closeXW(xml);
+<<<<<<< HEAD
           self.model.changeStudyR();//change
+=======
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
 
         }
 
       });
   
     },
+<<<<<<< HEAD
     sendII: function(){
 
       //var folderName = window.opener.$("#folder").val();
@@ -163,6 +175,21 @@ define([
         this.model.closeXW(xml);
 
       }
+=======
+    send:function(){
+
+      var modalr =this.$el.find('#Mymodal2');
+      //console.log(modalr);
+      $(modalr).modal('hide');
+      var rulename = this.$el.find('#sendRuleInput');
+      var fileName = $(rulename).val();
+      var xml = this.model.makeXML();
+      //this.model.sendToServer(xml.flush(),'C:\\Program Files',fileName);
+      this.passtoParentWindow(xml,fileName);
+      this.model.closeXW(xml);
+
+
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
 
     },
 
@@ -332,6 +359,7 @@ define([
       _.each(this.model.TRows,function(v,i){
         if (v.typeR=='C'){
           
+<<<<<<< HEAD
           //add the drop downs load them without setting them according to the model
           self.$el.find("#ruleTable tbody").append(self.addTableRaw(self.model.counter,v.level,v.ID,v.cType));//add row to the dom
           self.$el.find('#'+v.ID).find('#droponeDiv').find('.dropdown-toggle').html(v.rowValue.dropdownOne+' <span class="caret"></span>');
@@ -342,6 +370,13 @@ define([
             self.$el.find('#'+v.ID).find('#dropthreeDiv').find('.dropdown-toggle').html(v.rowValue.dropdownThree+' <span class="caret"></span>');
           }
           
+=======
+          
+          self.$el.find("#ruleTable tbody").append(self.addTableRaw(self.model.counter,v.level,v.ID,v.cType));//add row to the dom
+          self.$el.find('#'+v.ID).find('#droponeDiv').find('.dropdown-toggle').html(v.rowValue.dropdownOne+' <span class="caret"></span>');
+          self.$el.find('#'+v.ID).find('#droptwoDiv').find('.dropdown-toggle').html(v.rowValue.dropdownTwo+' <span class="caret"></span>');
+          self.$el.find('#'+v.ID).find('#dropthreeDiv').find('.dropdown-toggle').html(v.rowValue.dropdownThree+' <span class="caret"></span>');
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
           if (v.cType==='label'){
             self.$el.find('#'+v.ID).find('#conditionLabel').val(v.rowValue.dropdownThree);
           }
@@ -388,7 +423,11 @@ define([
 
         }
         var raw = ''+
+<<<<<<< HEAD
         '<tr id="'+id+'" class="clickableRow" ><td style="'+this.addPadding(level)+';">'+this.addDropOne(counter)+this.addDropTwo(counter,type)+this.addDropThree(counter,type)+this.addButtons()+'</td></tr>';
+=======
+        '<tr id="'+id+'" class="clickableRow" ><td style="'+this.addPadding(level)+';">'+this.addDropOne(counter)+this.addDropTwo(counter)+this.addDropThree(counter,type)+this.addButtons()+'</td></tr>';
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
         console.log(raw);
         return raw;
 
@@ -419,6 +458,7 @@ define([
     },
     addDropOne:function(counter){
         console.log('starting add drop one');
+<<<<<<< HEAD
         var conditionsArray = new Array();
        _.each(this.model.conditions,function(v,i){
              var cName = v.cName;
@@ -427,12 +467,15 @@ define([
        });
        conditionsArray.sort(); 
        conditionsArray.reverse();
+=======
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
        var drop = ''+
        '<div id="droponeDiv" class="btn-group">'+ 
          '<button id ="dropone" class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">'+
              'Condition <span class="caret"></span>'+ 
            '</button>'+ 
            '<ul class="dropdown dropdown-menu">';
+<<<<<<< HEAD
            //  _.each(this.model.conditions,function(v,i){
            //   var cName = v.cName;
            //   drop =drop + '<li id="li1"><a>'+cName+'</a></li>';
@@ -441,19 +484,32 @@ define([
             for (var index=0;index<size;index++){
               drop =drop + '<li id="li1"><a>'+conditionsArray.pop()+'</a></li>';
             }
+=======
+            _.each(this.model.conditions,function(v,i){
+             var cName = v.cName;
+             drop =drop + '<li id="li1"><a>'+cName+'</a></li>';
+           });
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
             drop = drop+'</ul>'+
        '</div>';
      return drop;
 
     },
 
+<<<<<<< HEAD
     addDropTwo:function(counter,type){
         if (type=='none') return "";
+=======
+    addDropTwo:function(counter){
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
         return this.model.getHtml('DropTwo');
     },
 
     addDropThree:function(counter,type){
+<<<<<<< HEAD
       if (type==='none') return "";
+=======
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
       if(type==='label'){
         return this.model.getHtml('Clabel');
       }else{
@@ -546,6 +602,10 @@ define([
       condition = setText;
       var thisContex = this; 
    
+<<<<<<< HEAD
+=======
+
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
       console.log('condition'+condition);
       _.each(this.model.conditions,function(v,i){
 
@@ -573,7 +633,10 @@ define([
 
     },
     installDropThree:function(v,rowID,setText,target){
+<<<<<<< HEAD
       if (v.cType==='none') return;
+=======
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
       var values = v.values;
       var div = $('#'+rowID).find('#dropthreeDiv'); 
       var ul = $(div).children('ul');

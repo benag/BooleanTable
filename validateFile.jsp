@@ -18,17 +18,25 @@
       #result{
 
         padding:30px;
+<<<<<<< HEAD
         font: normal 14px courier !important;
+=======
+        font: normal 12px courier !important;
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
 
       }
 
       
       </style>
+<<<<<<< HEAD
       
+=======
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
       <script src="jshint.js"></script>
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
       <script>
 
+<<<<<<< HEAD
       function parseline(str,a,b,c,d){
         var res = str.replace('{a}',a);
         res = res.replace('{b}',b);
@@ -40,10 +48,13 @@
 
       }
 
+=======
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
         $(document).ready( function(){
           var path = $('#debug').val();
           console.log(path);
           var cont = $('#rulename').val();
+<<<<<<< HEAD
           console.log(cont);
 
           JSHINT(cont);
@@ -75,6 +86,12 @@
 
           }
           
+=======
+          JSHINT(cont);
+          var res = JSON.stringify(JSHINT.errors, null, 2);
+          console.log(res);
+          $('#result').text(res);
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
 
 
       
@@ -116,7 +133,11 @@
         
        
 			
+<<<<<<< HEAD
 	 	    <textarea id="rulename" style="display:none;" name="Language"><%=content%></textarea>
+=======
+	 	    <input type="hidden" id="rulename" name="Language" value="<%=content%>">  
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
         <input type="hidden" id="debug" name="Language" value="<%=path%>">  
         <div id="resultdiv" style="">
         </br>

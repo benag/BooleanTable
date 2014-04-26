@@ -1,5 +1,8 @@
 // 2.3.0
+<<<<<<< HEAD
 
+=======
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
 var JSHINT;
 var window;
 if (typeof window === 'undefined') window = {};

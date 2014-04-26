@@ -41,7 +41,11 @@ function getFile(){
 	var day     = date.getDate();
 	var hour    = date.getHours();
 	var minute  = date.getMinutes();
+<<<<<<< HEAD
 	var timestamp  = month+ "/"+day+"/"+year+", "+hour+":"+minute;
+=======
+	var timestamp  = month+ "/"+day+"/"+year+", "+hour+":"+minute+':'+minute;
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
 	
 	//'<tr><td>8/19/2011 16:23:30</td><td>colintest</td><td>cts2e@virginia.edu</td><td>colin</td><td>1</td><td>non</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td></td><td></td><td></td></tr>'
 	var filedata = '<tr><td>'+timestamp+'</td><td>'+value('folder')+'</td><td>'+value('researchEmail')+'</td><td>'+value('researchName')+'</td><td>'+
@@ -290,6 +294,7 @@ function processForm(){
     };
 
 
+<<<<<<< HEAD
     //var url="/implicit/rules";//on implicit
     var url="/implicit/rules";//for local
     var msgurl = "/ruleGenerator/msg.html";//for local
@@ -401,6 +406,75 @@ function sendFormToServer(name,text,msg1,url){
 }
 //send rule file 
  function sendToServer(xml,path,name,url,msg2,overwrite){
+=======
+    var url="/implicit/rules";
+    //var msgurl = "/ruleGenerator/msg.html";
+    var msgurl = "/implicit/user/bgoldenberg/ruleGenerator/msg.html";
+	var text = getFile();
+	var xml = $('#hide' ).val();
+	var name = $('#researchName').val();
+	var ruleName = $('#rulename').val();
+	var path = $('#folder').val();
+	
+	if (xml!='parent'){
+		sendToServer(xml,path,ruleName,url,msg2);
+	}
+
+	if (msg2.success!=false){
+
+		var timeStamp = Math.round(+new Date()/1000); 
+		var data={};
+	        //data.path='/user/'+'bgoldenberg';
+	        data.path='/forms/checklist.html';
+	        data.FileName =name+timeStamp;
+	        console.log('name: '+data.FileName+ ', folder: '+data.path);
+	        data.xml = text;
+	        data.submit='true';
+	        data.realPath = '';
+	        console.log(text);
+
+		$.ajax({
+	              type: 'POST',
+	              url: url,
+	              data: JSON.stringify(data),
+	              success: function(result) {
+
+	                      var res = result.length;
+	                      if(res === 3){
+	                        //alert('File was saved successfully.');
+							    msg1.success=true;
+								msg1.text = "The Deploy form was sent successfully ";
+	                      }else{
+	                        //alert('File was not saved on our servers, check your study folder name.');
+								msg1.success=false;
+								msg1.text = "There was a problem sending the deploy form";
+	                      }
+	                          
+	                  },
+	              fail: function(jqXHR, textStatus, errorThrown){
+	                  console.log(jqXHR);
+	                  console.log(textStatus);
+	                  console.log(errorThrown);
+
+	                  alert('fail');
+
+	              },
+	              dataType: 'text',
+	              async:false
+	   });
+ 	}else{
+ 		msg1.sucess=false;
+ 		msg1.text = "Deploy Form Was not Sent because there was a problem saving the rule file. "
+ 	}
+ 
+ window.location.assign(msgurl+'?success1='+msg1.success+'&msg1='+msg1.text+'&success2='+msg2.success+'&msg2='+msg2.text);
+
+ }
+
+
+//send rule file 
+ function sendToServer(xml,path,name,url,msg2){
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
         
         
         var data={};
@@ -412,7 +486,10 @@ function sendFormToServer(name,text,msg1,url){
         data.realPath = '';
         console.log('name: '+data.FileName+ ', folder: '+data.path);
         data.xml = xml;
+<<<<<<< HEAD
         data.overwrite = overwrite;
+=======
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
         console.log(xml);
         $.ajax({
               type: 'POST',
@@ -432,7 +509,11 @@ function sendFormToServer(name,text,msg1,url){
                       	}else{
                       		msg2.success =false;
                       		//alert('File was not saved on our servers, check your study folder name.');
+<<<<<<< HEAD
                         	msg2.text = 'Study Folder was not Found, check your study folder name.';
+=======
+                        	msg2.text = 'File was not saved on our servers, check your study folder name.';
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
 
 
                       	}
@@ -451,6 +532,43 @@ function sendFormToServer(name,text,msg1,url){
               dataType: 'text',
               async:false
         });
+<<<<<<< HEAD
  	
  }
      
+=======
+ }
+       //  $.post(this.url,JSON.stringify(data),function(data){
+       //     // alert(data);
+       //      alert('success');
+       // },"html").fail(function ( jqXHR, textStatus, errorThrown){
+       //   console.log(jqXHR);
+       //   console.log(textStatus);
+       //   console.log(errorThrown);
+
+       //  alert('fail');
+
+
+
+
+       // });
+        // promise.fail(function(){
+        //     //$('.alert').alert();
+        //     //$('.alert').show();
+        //     alert('File was not saved on our servers, check your study folder name.');
+        //    // $('#Errormodal').modal('toggle');
+
+        // });
+        // // }).fail( function(xhr, textStatus, errorThrown) {
+        // // alert(xhr.responseText);}
+        // promise.done(function(){
+
+        //     alert('File was saved successfully.');
+
+
+        // });
+        
+
+
+   
+>>>>>>> a32b1107a54a996ad8f8f1892ca0c590d574b191
